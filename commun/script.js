@@ -53,7 +53,7 @@ const CONFIG = {
   // Ta signature dans la barre de démo en bas de page
   proposition: {
     nom: "Reda Lakhledj",
-    telephone: "" // <- mets ton numéro ici, ex. "06 12 34 56 78" (vide = nom seul)
+    telephone: "07 63 45 60 80" // ton numéro (vide "" = nom seul)
   }
 };
 
