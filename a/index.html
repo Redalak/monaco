@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Monaco, café-bar-bistrot à Paris 13e (version Comptoir)</title>
+  <meta name="description" content="Monaco, café-bar-bistrot au 2 rue Vulpian, Paris 13e. Formules du midi claires, ouvert du lundi au samedi de 7h30 à minuit, brunch le dimanche.">
+  <meta name="theme-color" content="#1F4A3A">
+
+  <!-- Aperçu du lien (SMS, WhatsApp…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Monaco">
+  <meta property="og:title" content="Monaco, version A : Comptoir">
+  <meta property="og:description" content="Café-bar-bistrot rue Vulpian, Paris 13e. Les formules du midi et leurs prix, en un coup d'œil.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4A3A'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23E2B850'%3EM%3C/text%3E%3C/svg%3E">
+
+  <!-- Polices : DM Serif Display (enseigne) + Work Sans (texte) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Work+Sans:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="../commun/commun.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/script.js" defer></script>
+</head>
+<body>
+  <a class="evitement" href="#midi">Aller aux formules du midi</a>
+
+  <!-- ============ EN-TÊTE ============ -->
+  <header class="entete">
+    <a class="entete-nom" href="#haut">Monaco</a>
+    <nav class="entete-nav" aria-label="Sections de la page">
+      <a href="#midi">Midi</a>
+      <a href="#journee">Journée</a>
+      <a href="#infos">Infos</a>
+    </nav>
+    <a class="entete-appel" href="tel:+33144930022" aria-label="Appeler le Monaco au 01 44 93 00 22">
+      <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+      <span class="entete-appel-texte">01 44 93 00 22</span>
+    </a>
+  </header>
+
+  <main id="haut">
+
+    <!-- ============ DEVANTURE (hero) ============ -->
+    <section class="devanture" aria-labelledby="titre">
+      <p class="devanture-genre">Café, bar, bistrot</p>
+      <h1 id="titre" class="enseigne">Monaco</h1>
+      <p class="devanture-adresse">2 rue Vulpian, Paris 13e</p>
+    </section>
+
+    <!-- Le store rayé : purement décoratif (seule animation de la page) -->
+    <div class="store-ombre" aria-hidden="true"><div class="store"></div></div>
+
+    <div class="accueil">
+      <p class="statut" data-statut>
+        <span class="statut-pastille" aria-hidden="true"></span>
+        <span class="statut-texte" data-statut-texte>Ouvert du lundi au samedi</span>
+        <span class="statut-detail" data-statut-detail>de 7h30 à minuit</span>
+      </p>
+      <p class="accueil-texte">Le café dès 7h30, la formule du midi, l'apéro jusqu'à minuit. Le dimanche, brunch.</p>
+      <a class="bouton" href="#midi">Voir les formules du midi</a>
+    </div>
+
+    <!-- ============ FORMULES DU MIDI (bloc n°1) ============ -->
+    <section id="midi" class="midi" aria-labelledby="titre-midi">
+      <div class="carte">
+        <h2 id="titre-midi" class="carte-titre">Formules du midi</h2>
+        <p class="carte-quand">
+          <span data-texte="midiJours">Du lundi au samedi</span>,
+          <span data-texte="midiHoraire">de 12h à 14h30</span>
+        </p>
+
+        <ul class="carte-lignes">
+          <li class="ligne">
+            <span class="ligne-nom">Plat du jour seul</span>
+            <span class="ligne-points" aria-hidden="true"></span>
+            <span class="ligne-prix" data-prix="plat">14 €</span>
+          </li>
+          <li class="ligne">
+            <span class="ligne-nom">Entrée + plat<br><em>ou</em> plat + dessert</span>
+            <span class="ligne-points" aria-hidden="true"></span>
+            <span class="ligne-prix" data-prix="deux">18 €</span>
+          </li>
+          <li class="ligne">
+            <span class="ligne-nom">Entrée + plat + dessert</span>
+            <span class="ligne-points" aria-hidden="true"></span>
+            <span class="ligne-prix" data-prix="trois">22 €</span>
+          </li>
+        </ul>
+
+        <div class="carte-pied">
+          <p><strong>Prix par personne.</strong>
+            <span data-texte="midiCompris">Pain et carafe d'eau compris</span>.
+            <span data-texte="midiNonCompris">Boissons et café en supplément</span>.
+          </p>
+          <p class="carte-exemple" data-texte="exemple">À deux, entrée + plat chacun : 2 × 18 € = 36 €, hors boissons.</p>
+        </div>
+      </div>
+      <p class="mention-exemple" data-mention-exemple>Prix d'exemple</p>
+    </section>
+
+    <!-- ============ LA JOURNÉE ============ -->
+    <section id="journee" class="journee" aria-labelledby="titre-journee">
+      <h2 id="titre-journee" class="section-titre">Du matin au soir</h2>
+      <div class="journee-grille">
+        <article class="moment">
+          <p class="moment-heure">Dès <span data-texte="ouverture">7h30</span></p>
+          <h3>Le matin</h3>
+          <p>Café et petit-déjeuner, au comptoir ou en salle.</p>
+        </article>
+        <article class="moment">
+          <p class="moment-heure">Dès <span data-texte="apero">18h</span></p>
+          <h3>Le soir</h3>
+          <p>L'apéro et des planches à partager, jusqu'à minuit.</p>
+        </article>
+        <article class="moment moment-brunch">
+          <p class="moment-heure">Dimanche, <span data-texte="brunchHoraire">de 10h30 à 15h</span></p>
+          <h3>Le brunch</h3>
+          <p class="brunch-prix"><span data-prix="brunch">26 €</span> par personne</p>
+          <p data-texte="brunchCompris">Boisson chaude et jus de fruits compris</p>
+          <p class="mention-exemple" data-mention-exemple>Prix d'exemple</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ HORAIRES & ADRESSE ============ -->
+    <section id="infos" class="infos" aria-labelledby="titre-infos">
+      <div class="infos-contenu">
+        <h2 id="titre-infos" class="section-titre">Horaires et adresse</h2>
+        <dl class="horaires">
+          <div>
+            <dt>Du lundi au samedi</dt>
+            <dd>7h30 à minuit</dd>
+          </div>
+          <div>
+            <dt>Dimanche</dt>
+            <dd>10h30 à 15h, brunch</dd>
+          </div>
+        </dl>
+        <p class="statut statut-petit" data-statut>
+          <span class="statut-pastille" aria-hidden="true"></span>
+          <span class="statut-texte" data-statut-texte></span>
+          <span class="statut-detail" data-statut-detail></span>
+        </p>
+        <address class="adresse">
+          Monaco<br>
+          2 rue Vulpian<br>
+          75013 Paris
+        </address>
+        <div class="actions">
+          <a class="bouton" href="tel:+33144930022">Appeler</a>
+          <a class="bouton bouton-contour" href="https://www.google.com/maps/search/?api=1&amp;query=Monaco+2+rue+Vulpian+75013+Paris" target="_blank" rel="noopener">Itinéraire</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <p class="pied-nom">Monaco</p>
+    <p>2 rue Vulpian, 75013 Paris, 01 44 93 00 22</p>
+    <a class="pied-insta" href="https://www.instagram.com/nwmonaco/" target="_blank" rel="noopener">Instagram : @nwmonaco</a>
+  </footer>
+
+  <!-- Barre de démo (à retirer pour le vrai site) -->
+  <nav class="demo-barre" aria-label="Changer de version">
+    <div class="demo-versions">
+      <span class="demo-titre">Version</span>
+      <a href="../a/index.html" aria-current="page" aria-label="Version A, Comptoir">A</a>
+      <span class="demo-sep" aria-hidden="true">·</span>
+      <a href="../b/index.html" aria-label="Version B, Formule">B</a>
+      <span class="demo-sep" aria-hidden="true">·</span>
+      <a href="../c/index.html" aria-label="Version C, Journée">C</a>
+    </div>
+    <p class="demo-auteur" data-proposition>Proposition de Reda Lakhledj</p>
+  </nav>
+</body>
+</html>

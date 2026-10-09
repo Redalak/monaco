@@ -1,0 +1,503 @@
+/* =====================================================================
+   VERSION A : « COMPTOIR »
+   Un bistrot parisien : façade vert bouteille, enseigne dorée,
+   store rayé, carrelage blanc, comptoir en zinc, carte à pointillés.
+   ===================================================================== */
+
+:root {
+  --vert: #1F4A3A;      /* façade, boutons */
+  --vert-fonce: #163729;
+  --or: #E2B850;        /* enseigne */
+  --carreau: #FAFAF7;   /* carrelage */
+  --joint: #E4E7E6;     /* joints du carrelage = gris zinc */
+  --zinc: #E4E7E6;      /* comptoir */
+  --texte: #1B2622;     /* texte courant, vert presque noir */
+  --texte-doux: #4A5753;
+  --focus: #1F4A3A;
+
+  --serif: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --sans: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --gouttiere: 16px;
+}
+
+body {
+  background-color: var(--carreau);
+  /* Motif de carreaux : deux dégradés de 1px qui dessinent les joints */
+  background-image:
+    linear-gradient(var(--joint) 1px, transparent 1px),
+    linear-gradient(90deg, var(--joint) 1px, transparent 1px);
+  background-size: 28px 28px;
+  color: var(--texte);
+  font: 400 1rem/1.55 var(--sans);
+}
+
+/* ---------------- En-tête ---------------- */
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 var(--gouttiere);
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--vert);
+  color: #fff;
+  border-bottom: 1px solid rgba(226, 184, 80, 0.35);
+}
+
+.entete-nom {
+  font: 1.5rem/1 var(--serif);
+  color: var(--or);
+  text-decoration: none;
+  padding: 10px 0;
+  margin-right: auto;
+}
+
+.entete-nav {
+  display: flex;
+}
+
+.entete-nav a {
+  display: grid;
+  place-items: center;
+  min-height: 52px;
+  padding: 0 9px;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.entete-appel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 999px;
+  background: var(--or);
+  color: var(--vert-fonce);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.entete-appel-texte {
+  display: none;
+}
+
+.entete :focus-visible {
+  outline-color: var(--or);
+}
+
+/* ---------------- Devanture (hero) ---------------- */
+.devanture {
+  position: relative;
+  padding: 44px var(--gouttiere) 36px;
+  background: var(--vert);
+  color: #fff;
+  text-align: center;
+}
+
+/* Filet doré intérieur, comme le cadre peint d'une vitrine */
+.devanture::before {
+  content: "";
+  position: absolute;
+  inset: 12px 12px 8px;
+  border: 1px solid rgba(226, 184, 80, 0.45);
+  pointer-events: none;
+}
+
+.devanture-genre {
+  font-size: 0.9375rem;
+  letter-spacing: 0.04em;
+  color: #DDE6E1;
+}
+
+/* L'enseigne : très grande, dorée à la feuille */
+.enseigne {
+  margin: 4px 0 2px;
+  font: 400 clamp(5rem, 25vw, 12rem)/0.95 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--or);
+  text-shadow: 0 2px 0 #9C7724, 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Effet dorure (dégradé dans les lettres) si le navigateur le permet */
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .enseigne {
+    background: linear-gradient(180deg, #F6DE95 0%, #E2B850 48%, #B98D2C 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(0 2px 0 #8A6A1F) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+  }
+}
+
+.devanture-adresse {
+  font-size: 1rem;
+  color: #DDE6E1;
+}
+
+/* ---------------- Store rayé ---------------- */
+.store-ombre {
+  /* L'ombre est sur le parent car le masque découperait l'ombre */
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.2));
+  margin-top: -1px;
+}
+
+.store {
+  height: 60px;
+  background: repeating-linear-gradient(90deg,
+    var(--vert) 0 32px,
+    var(--carreau) 32px 64px);
+  /* Bas festonné : un demi-cercle par rayure */
+  -webkit-mask:
+    linear-gradient(#000 0 0) top / 100% 44px no-repeat,
+    radial-gradient(16px at 16px 44px, #000 98%, transparent) 0 0 / 32px 60px repeat-x;
+  mask:
+    linear-gradient(#000 0 0) top / 100% 44px no-repeat,
+    radial-gradient(16px at 16px 44px, #000 98%, transparent) 0 0 / 32px 60px repeat-x;
+  transform-origin: top;
+  animation: store-deroule 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+}
+
+/* La seule animation de la version : le store qui se déroule */
+@keyframes store-deroule {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+/* ---------------- Accueil sous le store ---------------- */
+.accueil {
+  padding: 28px var(--gouttiere) 8px;
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.accueil-texte {
+  margin: 16px auto 22px;
+  max-width: 30em;
+  font-size: 1.0625rem;
+}
+
+/* Badge ouvert / fermé */
+.statut {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 8px;
+  padding: 10px 16px;
+  border: 1px solid var(--vert);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.9375rem;
+}
+
+.statut-pastille {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #8A9490;
+}
+.statut[data-etat="ouvert"] .statut-pastille { background: #2E8B57; }
+.statut[data-etat="ferme"] .statut-pastille  { background: #B23B2A; }
+
+.statut-texte {
+  font-weight: 600;
+}
+
+.statut-detail {
+  color: var(--texte-doux);
+}
+
+.statut-petit {
+  margin: 20px 0 0;
+}
+
+/* Boutons */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 12px 24px;
+  border: 2px solid var(--vert);
+  border-radius: 4px;
+  background: var(--vert);
+  color: #fff;
+  font: 600 1rem/1.2 var(--sans);
+  text-decoration: none;
+}
+
+.bouton-contour {
+  background: #fff;
+  color: var(--vert);
+}
+
+/* ---------------- Carte des formules ---------------- */
+.midi {
+  padding: 40px var(--gouttiere) 48px;
+}
+
+.carte {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 32px 20px 24px;
+  background: #fff;
+  border: 6px double var(--vert);
+  box-shadow: 0 1px 0 var(--joint), 0 14px 30px -18px rgba(31, 74, 58, 0.45);
+}
+
+.carte-titre {
+  font: 400 clamp(2.25rem, 10vw, 3rem)/1.05 var(--serif);
+  color: var(--vert);
+  text-align: center;
+}
+
+.carte-quand {
+  margin: 8px 0 24px;
+  text-align: center;
+  color: var(--texte-doux);
+}
+
+.carte-lignes {
+  border-top: 1px solid var(--joint);
+}
+
+/* Une ligne de menu : nom ........ prix */
+.ligne {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--joint);
+}
+
+.ligne-nom {
+  flex: 0 1 auto;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.ligne-nom em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--texte-doux);
+}
+
+.ligne-points {
+  flex: 1 1 24px;
+  min-width: 24px;
+  margin-bottom: 0.4em;
+  border-bottom: 2px dotted #9AA6A1;
+}
+
+.ligne-prix {
+  flex: none;
+  font: 400 1.875rem/1 var(--serif);
+  color: var(--vert);
+  white-space: nowrap;
+}
+
+.carte-pied {
+  margin-top: 20px;
+  font-size: 0.9375rem;
+  color: var(--texte-doux);
+}
+
+.carte-pied strong {
+  color: var(--texte);
+}
+
+.carte-exemple {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--zinc);
+  border-left: 4px solid var(--or);
+  color: var(--texte);
+}
+
+.mention-exemple {
+  max-width: 34rem;
+  margin: 10px auto 0;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--texte-doux);
+  text-align: right;
+}
+
+/* ---------------- La journée ---------------- */
+.journee {
+  padding: 8px var(--gouttiere) 48px;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.section-titre {
+  font: 400 clamp(2rem, 9vw, 2.75rem)/1.1 var(--serif);
+  color: var(--vert);
+  margin-bottom: 20px;
+}
+
+.journee-grille {
+  display: grid;
+  gap: 12px;
+}
+
+.moment {
+  padding: 22px 20px;
+  background: #fff;
+  border: 1px solid var(--joint);
+  border-top: 4px solid var(--vert);
+}
+
+.moment h3 {
+  font: 400 1.75rem/1.15 var(--serif);
+  margin: 2px 0 6px;
+}
+
+.moment-heure {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--vert);
+}
+
+/* Le brunch du dimanche, en vert et or */
+.moment-brunch {
+  background: var(--vert);
+  border-color: var(--vert);
+  border-top-color: var(--or);
+  color: #fff;
+}
+.moment-brunch .moment-heure,
+.moment-brunch h3 {
+  color: var(--or);
+}
+
+.brunch-prix {
+  margin-bottom: 4px;
+}
+.brunch-prix span {
+  font: 400 2.25rem/1 var(--serif);
+  color: var(--or);
+}
+
+.moment-brunch .mention-exemple {
+  margin-top: 8px;
+  text-align: left;
+  color: #C9D6D0;
+}
+
+/* ---------------- Infos : le comptoir en zinc ---------------- */
+.infos {
+  padding: 40px var(--gouttiere) 44px;
+  background: linear-gradient(180deg, #EEF0EF 0%, var(--zinc) 40%, #D5DAD8 100%);
+  border-top: 6px solid var(--vert);
+}
+
+.infos-contenu {
+  max-width: 34rem;
+  margin: 0 auto;
+}
+
+.horaires div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #BFC6C3;
+}
+
+.horaires dt {
+  font-weight: 600;
+}
+
+.adresse {
+  margin: 20px 0 22px;
+  font-size: 1.0625rem;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ---------------- Pied de page ---------------- */
+.pied {
+  padding: 36px var(--gouttiere) 32px;
+  background: var(--vert);
+  color: #DDE6E1;
+  text-align: center;
+  font-size: 0.9375rem;
+}
+
+.pied-nom {
+  font: 400 2rem/1 var(--serif);
+  color: var(--or);
+  margin-bottom: 8px;
+}
+
+.pied-insta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 8px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.pied :focus-visible {
+  outline-color: var(--or);
+}
+
+/* ---------------- Tablette et ordinateur ---------------- */
+@media (min-width: 768px) {
+  :root {
+    --gouttiere: 32px;
+  }
+
+  .entete-nav a {
+    padding: 0 14px;
+  }
+
+  .entete-appel {
+    padding: 0 18px 0 14px;
+  }
+
+  .entete-appel-texte {
+    display: inline;
+  }
+
+  .devanture {
+    padding: 64px var(--gouttiere) 48px;
+  }
+
+  .store {
+    height: 72px;
+    background: repeating-linear-gradient(90deg,
+      var(--vert) 0 40px,
+      var(--carreau) 40px 80px);
+    -webkit-mask:
+      linear-gradient(#000 0 0) top / 100% 52px no-repeat,
+      radial-gradient(20px at 20px 52px, #000 98%, transparent) 0 0 / 40px 72px repeat-x;
+    mask:
+      linear-gradient(#000 0 0) top / 100% 52px no-repeat,
+      radial-gradient(20px at 20px 52px, #000 98%, transparent) 0 0 / 40px 72px repeat-x;
+  }
+
+  .carte {
+    padding: 44px 44px 32px;
+  }
+
+  .journee-grille {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

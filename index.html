@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Monaco : 3 propositions de site</title>
+  <meta name="description" content="Trois propositions de site vitrine pour le Monaco, café-bar-bistrot au 2 rue Vulpian, Paris 13e.">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Aperçu du lien (SMS, WhatsApp…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Monaco">
+  <meta property="og:title" content="Monaco : 3 propositions de site">
+  <meta property="og:description" content="Trois directions pour le site du Monaco. Choisissez celle qui vous ressemble.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4A3A'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23E2B850'%3EM%3C/text%3E%3C/svg%3E">
+
+  <!-- Les polices des 3 versions, pour que les aperçus soient fidèles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=DM+Serif+Display&family=Gloock&family=Karla:wght@400;700&family=Work+Sans:wght@400;600&display=swap">
+
+  <link rel="stylesheet" href="commun/commun.css">
+  <style>
+    /* Page d'accueil de la démo : sobre, pour laisser parler les 3 aperçus */
+    body {
+      background: #F1F2F1;
+      color: #1A1C1B;
+      font: 400 1rem/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    .page {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: calc(32px + env(safe-area-inset-top, 0px)) 16px 40px;
+    }
+
+    .intro h1 {
+      font-size: clamp(1.75rem, 7vw, 2.75rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .intro p {
+      max-width: 34em;
+      margin-top: 10px;
+      font-size: 1.0625rem;
+      color: #4A4F4D;
+    }
+
+    .cartes {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    /* Une carte = tout un lien (grande zone tactile) */
+    .choix {
+      display: block;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #fff;
+      color: inherit;
+      text-decoration: none;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+      transition: transform 0.15s ease;
+    }
+    .choix:active {
+      transform: scale(0.985);
+    }
+
+    .choix-texte {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px 16px;
+    }
+
+    .choix-nom {
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .choix-desc {
+      font-size: 0.9375rem;
+      color: #4A4F4D;
+    }
+
+    .choix-ouvrir {
+      flex: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #1A1C1B;
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+
+    /* ---- Aperçus : chaque bandeau reprend couleurs et typo de sa version ---- */
+    .apercu {
+      height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* A : Comptoir */
+    .apercu-a {
+      display: flex;
+      flex-direction: column;
+      background: #1F4A3A;
+    }
+    .apercu-a .enseigne {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      font: 400 4.5rem/1 "DM Serif Display", Georgia, serif;
+      color: #E2B850;
+      text-shadow: 0 2px 0 #8A6A1F;
+    }
+    .apercu-a .store {
+      height: 34px;
+      background: repeating-linear-gradient(90deg, #1F4A3A 0 22px, #FAFAF7 22px 44px);
+      -webkit-mask:
+        linear-gradient(#000 0 0) top / 100% 23px no-repeat,
+        radial-gradient(11px at 11px 23px, #000 98%, transparent) 0 0 / 22px 34px repeat-x;
+      mask:
+        linear-gradient(#000 0 0) top / 100% 23px no-repeat,
+        radial-gradient(11px at 11px 23px, #000 98%, transparent) 0 0 / 22px 34px repeat-x;
+      background-color: transparent;
+    }
+    .apercu-a .sol {
+      height: 52px;
+      background-color: #FAFAF7;
+      background-image:
+        linear-gradient(#E4E7E6 1px, transparent 1px),
+        linear-gradient(90deg, #E4E7E6 1px, transparent 1px);
+      background-size: 13px 13px;
+    }
+
+    /* B : Formule */
+    .apercu-b {
+      padding: 18px 18px 0;
+      background: #F4C430;
+      color: #000;
+    }
+    .apercu-b .gros {
+      font-family: "Archivo", "Arial Narrow", sans-serif;
+      font-weight: 900;
+      font-stretch: 62%;
+      font-size: 3.5rem;
+      line-height: 0.86;
+    }
+    .apercu-b .prix {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding: 8px 14px 6px;
+      background: #000;
+      color: #F4C430;
+      font-family: "Archivo", sans-serif;
+      font-weight: 900;
+      font-stretch: 62%;
+      font-size: 2.5rem;
+      line-height: 1;
+    }
+
+    /* C : Journée */
+    .apercu-c {
+      padding: 22px 18px;
+      background: #DCEBF2;
+      color: #13294B;
+    }
+    .apercu-c .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 18px;
+      background: #fff;
+      font: 400 1.5rem/1.1 "Gloock", Georgia, serif;
+    }
+    .apercu-c .badge::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #1E7A4C;
+    }
+    .apercu-c .badge[data-etat="ferme"]::before {
+      background: #A8341F;
+    }
+    .apercu-c .nom {
+      margin-top: 14px;
+      font: 400 3rem/1 "Gloock", Georgia, serif;
+    }
+    .apercu-c .brunch {
+      position: absolute;
+      right: 16px;
+      bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 14px;
+      background: #A8341F;
+      color: #fff;
+      font: 700 0.875rem/1.2 "Karla", sans-serif;
+    }
+
+    .pied {
+      margin-top: 32px;
+      font-size: 0.9375rem;
+      color: #4A4F4D;
+    }
+    .pied a {
+      display: inline-block;
+      padding: 10px 0;
+      color: #1A1C1B;
+      font-weight: 700;
+    }
+
+    @media (min-width: 900px) {
+      .page {
+        padding-top: 64px;
+      }
+      .cartes {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .apercu {
+        height: 220px;
+      }
+    }
+  </style>
+  <script src="commun/script.js" defer></script>
+</head>
+<body>
+  <main class="page">
+    <header class="intro">
+      <h1>Monaco : 3 propositions de site</h1>
+      <p>Le même contenu, trois styles. Les formules du midi et leurs prix sont mis en avant dans chacune. Touchez une version pour l'ouvrir.</p>
+    </header>
+
+    <div class="cartes">
+      <a class="choix" href="a/index.html">
+        <div class="apercu apercu-a" aria-hidden="true">
+          <div class="enseigne">Monaco</div>
+          <div class="sol"><div class="store"></div></div>
+        </div>
+        <div class="choix-texte">
+          <div>
+            <h2 class="choix-nom">A. Comptoir</h2>
+            <p class="choix-desc">Le bistrot parisien : vert bouteille, enseigne dorée, carte à l'ancienne.</p>
+          </div>
+          <span class="choix-ouvrir">Ouvrir</span>
+        </div>
+      </a>
+
+      <a class="choix" href="b/index.html">
+        <div class="apercu apercu-b" aria-hidden="true">
+          <div class="gros">Le midi,<br>c'est clair.</div>
+          <div class="prix" data-prix="trois">22 €</div>
+        </div>
+        <div class="choix-texte">
+          <div>
+            <h2 class="choix-nom">B. Formule</h2>
+            <p class="choix-desc">Une affiche : jaune et noir, prix en très grand, impossible de se tromper.</p>
+          </div>
+          <span class="choix-ouvrir">Ouvrir</span>
+        </div>
+      </a>
+
+      <a class="choix" href="c/index.html">
+        <div class="apercu apercu-c" aria-hidden="true">
+          <div class="badge" data-statut><span data-statut-texte>Ouvert maintenant</span></div>
+          <div class="nom">Monaco</div>
+          <div class="brunch">Dimanche : brunch</div>
+        </div>
+        <div class="choix-texte">
+          <div>
+            <h2 class="choix-nom">C. Journée</h2>
+            <p class="choix-desc">Ouvert ou fermé en direct, et la journée du café à minuit, heure par heure.</p>
+          </div>
+          <span class="choix-ouvrir">Ouvrir</span>
+        </div>
+      </a>
+    </div>
+
+    <footer class="pied">
+      <p data-proposition>Proposition de Reda Lakhledj</p>
+    </footer>
+  </main>
+</body>
+</html>

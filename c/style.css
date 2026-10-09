@@ -1,0 +1,534 @@
+/* =====================================================================
+   VERSION C : « JOURNÉE »
+   Le site raconte la journée heure par heure. Ciel de Paris,
+   encre bleue, touche de rouge brique. Gloock + Karla.
+   Le badge "Ouvert / Fermé" est le héros de la page.
+   ===================================================================== */
+
+:root {
+  --ciel: #DCEBF2;
+  --ciel-clair: #EEF5F9;
+  --encre: #13294B;
+  --encre-douce: #3E5272;
+  --brique: #A8341F;
+  --blanc: #fff;
+  --vert-ouvert: #1E7A4C;
+  --focus: #A8341F;
+
+  --titre: "Gloock", Georgia, "Times New Roman", serif;
+  --texte: "Karla", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --gouttiere: 16px;
+}
+
+body {
+  background: var(--ciel);
+  color: var(--encre);
+  font: 400 1.0625rem/1.55 var(--texte);
+}
+
+/* ---------------- En-tête ---------------- */
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 var(--gouttiere);
+  padding-top: env(safe-area-inset-top, 0px);
+  background: rgba(220, 235, 242, 0.92);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(19, 41, 75, 0.15);
+}
+
+.entete-nom {
+  margin-right: auto;
+  padding: 10px 0;
+  font: 400 1.5rem/1 var(--titre);
+  color: var(--encre);
+  text-decoration: none;
+}
+
+.entete-nav {
+  display: flex;
+}
+
+.entete-nav a {
+  display: grid;
+  place-items: center;
+  min-height: 52px;
+  padding: 0 9px;
+  color: var(--encre);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.entete-appel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 999px;
+  background: var(--encre);
+  color: var(--blanc);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.entete-appel-texte {
+  display: none;
+}
+
+/* ---------------- Hero ---------------- */
+.hero {
+  padding: 36px var(--gouttiere) 44px;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+/* Animation d'entrée unique : les éléments du hero apparaissent en cascade */
+.hero > * {
+  animation: hero-entre 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hero > :nth-child(2) { animation-delay: 0.12s; }
+.hero > :nth-child(3) { animation-delay: 0.2s; }
+.hero > :nth-child(4) { animation-delay: 0.28s; }
+
+@keyframes hero-entre {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Le grand badge Ouvert / Fermé */
+.badge {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 18px 24px 18px 20px;
+  border-radius: 24px;
+  background: var(--blanc);
+  box-shadow: 0 1px 0 rgba(19, 41, 75, 0.08), 0 18px 40px -24px rgba(19, 41, 75, 0.5);
+}
+
+.badge-ligne {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge-pastille {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #8193AE;
+}
+
+.badge-texte {
+  font: 400 clamp(2rem, 9.5vw, 3.5rem)/1.05 var(--titre);
+}
+
+.badge-detail {
+  padding-left: 28px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--encre-douce);
+}
+
+/* Ouvert : pastille verte avec un halo */
+.badge[data-etat="ouvert"] .badge-pastille {
+  background: var(--vert-ouvert);
+  box-shadow: 0 0 0 5px rgba(30, 122, 76, 0.18);
+}
+
+/* Fermé : texte et pastille en rouge brique */
+.badge[data-etat="ferme"] .badge-pastille {
+  background: var(--brique);
+  box-shadow: 0 0 0 5px rgba(168, 52, 31, 0.15);
+}
+.badge[data-etat="ferme"] .badge-texte {
+  color: var(--brique);
+}
+
+.hero-titre {
+  margin-top: 28px;
+  font: 400 clamp(4.5rem, 24vw, 10rem)/0.9 var(--titre);
+  letter-spacing: -0.02em;
+}
+
+.hero-texte {
+  max-width: 26em;
+  margin: 14px 0 24px;
+  font-size: 1.1875rem;
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 12px 24px;
+  border: 2px solid var(--encre);
+  border-radius: 999px;
+  background: var(--encre);
+  color: var(--blanc);
+  font: 700 1rem/1.2 var(--texte);
+  text-decoration: none;
+}
+
+.bouton-clair {
+  background: transparent;
+  color: var(--encre);
+}
+
+/* ---------------- Frise de la journée ---------------- */
+.journee {
+  padding: 44px var(--gouttiere) 40px;
+  background: var(--ciel-clair);
+  border-radius: 28px 28px 0 0;
+}
+
+.journee > * {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-titre {
+  font: 400 clamp(2.125rem, 9vw, 3.25rem)/1.05 var(--titre);
+}
+
+.journee-sous {
+  margin-top: 8px;
+  color: var(--encre-douce);
+}
+
+.frise {
+  position: relative;
+  margin-top: 28px;
+}
+
+/* Sur mobile : trait à gauche, heure au-dessus du contenu
+   (toute la largeur reste disponible pour la carte des formules) */
+.etape {
+  position: relative;
+  padding: 0 0 30px 30px;
+}
+
+/* Trait de la frise */
+.etape::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 14px;
+  bottom: -10px;
+  width: 2px;
+  background: rgba(19, 41, 75, 0.25);
+}
+
+.etape-fin::before {
+  display: none;
+}
+
+/* Point sur la frise */
+.etape::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ciel-clair);
+  border: 2px solid var(--encre);
+}
+
+.etape-heure {
+  font: 400 1.625rem/1.1 var(--titre);
+  margin-bottom: 4px;
+}
+
+.etape-corps {
+  min-width: 0;
+}
+
+.etape h3 {
+  font: 700 1.25rem/1.25 var(--texte);
+  margin-bottom: 2px;
+}
+
+.etape-corps > p {
+  color: var(--encre-douce);
+}
+
+/* Étiquette "Maintenant" : cachée sauf sur l'étape en cours */
+.maintenant {
+  display: none;
+  width: fit-content;
+  margin-bottom: 6px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--brique);
+  color: var(--blanc);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.est-maintenant .maintenant {
+  display: block;
+}
+
+.etape.est-maintenant::after {
+  background: var(--brique);
+  border-color: var(--brique);
+  box-shadow: 0 0 0 5px rgba(168, 52, 31, 0.18);
+}
+
+.etape.est-maintenant .etape-heure {
+  color: var(--brique);
+}
+
+/* L'étape du midi : la carte des formules, bien visible */
+.etape-midi .etape-heure {
+  font-size: 2.25rem;
+}
+
+.etape-midi h3 {
+  font: 400 clamp(1.75rem, 7.5vw, 2.25rem)/1.1 var(--titre);
+  margin-bottom: 4px;
+}
+
+.formules {
+  margin-top: 16px;
+  padding: 6px 18px 18px;
+  border-radius: 20px;
+  background: var(--blanc);
+  box-shadow: 0 18px 40px -26px rgba(19, 41, 75, 0.55);
+}
+
+.formule {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid #D5E2EA;
+}
+
+.formule-nom {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.formule-prix {
+  flex: none;
+  font: 400 2.25rem/1 var(--titre);
+  white-space: nowrap;
+}
+
+.formules-note {
+  margin-top: 14px;
+  font-size: 0.9375rem;
+  color: var(--encre-douce);
+}
+
+.formules-exemple {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--ciel);
+  font-weight: 600;
+}
+
+.mention-exemple {
+  margin-top: 8px;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--encre-douce);
+}
+
+/* ---------------- Brunch du dimanche (rouge brique) ---------------- */
+.brunch-zone {
+  padding: 8px var(--gouttiere) 48px;
+  background: var(--ciel-clair);
+}
+
+.brunch {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 30px 24px 28px;
+  border-radius: 28px;
+  background: var(--brique);
+  color: var(--blanc);
+}
+
+.brunch .maintenant {
+  background: var(--blanc);
+  color: var(--brique);
+}
+
+.brunch-titre {
+  font: 400 clamp(2.125rem, 9vw, 3.25rem)/1.05 var(--titre);
+}
+
+.brunch-quand {
+  margin-top: 6px;
+  font-size: 1.1875rem;
+  font-weight: 700;
+}
+
+.brunch-prix {
+  margin: 18px 0 6px;
+}
+
+.brunch-prix [data-prix] {
+  font: 400 clamp(4rem, 20vw, 6rem)/0.9 var(--titre);
+}
+
+.brunch-unite {
+  font-weight: 600;
+}
+
+.brunch .mention-exemple {
+  color: #F4D9D3;
+}
+
+.brunch :focus-visible {
+  outline-color: var(--blanc);
+}
+
+/* ---------------- Infos ---------------- */
+.infos {
+  padding: 44px var(--gouttiere) 48px;
+}
+
+.infos > * {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.infos-grille {
+  display: grid;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.horaires div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(19, 41, 75, 0.2);
+}
+
+.horaires dt {
+  font-weight: 700;
+}
+
+.adresse {
+  margin-bottom: 18px;
+  font-size: 1.1875rem;
+  line-height: 1.4;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ---------------- Pied ---------------- */
+.pied {
+  padding: 36px var(--gouttiere) 32px;
+  background: var(--encre);
+  color: #D3DEEA;
+  text-align: center;
+  font-size: 0.9375rem;
+}
+
+.pied-nom {
+  font: 400 2rem/1 var(--titre);
+  color: var(--blanc);
+  margin-bottom: 8px;
+}
+
+.pied-insta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 6px;
+  color: var(--blanc);
+  font-weight: 700;
+}
+
+.pied :focus-visible {
+  outline-color: var(--ciel);
+}
+
+/* ---------------- Tablette et ordinateur ---------------- */
+@media (min-width: 768px) {
+  :root {
+    --gouttiere: 32px;
+  }
+
+  .entete-nav a {
+    padding: 0 14px;
+  }
+
+  .entete-appel {
+    padding: 0 18px 0 14px;
+  }
+
+  .entete-appel-texte {
+    display: inline;
+  }
+
+  .hero {
+    padding-top: 64px;
+    padding-bottom: 72px;
+  }
+
+  /* Sur grand écran : heure à gauche du trait, contenu à droite */
+  .etape {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 28px;
+    padding-left: 0;
+  }
+  .etape::before {
+    left: calc(7rem + 13px);
+  }
+  .etape::after {
+    left: calc(7rem + 8px);
+  }
+  .etape-heure {
+    font-size: 2rem;
+    text-align: right;
+    margin-bottom: 0;
+  }
+  .etape-midi .etape-heure {
+    font-size: 2.75rem;
+  }
+  .etape-corps {
+    padding-left: 24px;
+  }
+
+  .formules {
+    padding: 8px 28px 24px;
+  }
+
+  .brunch {
+    padding: 40px 44px 36px;
+  }
+
+  .infos-grille {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+}

@@ -1,0 +1,542 @@
+/* =====================================================================
+   VERSION B : « FORMULE »
+   Une affiche graphique : jaune, noir pur, blanc, bordures épaisses.
+   Archivo en très condensé pour les gros titres et les prix,
+   en très large pour les intertitres.
+   ===================================================================== */
+
+:root {
+  --jaune: #F4C430;
+  --noir: #000;
+  --blanc: #fff;
+  --trait: 4px solid var(--noir);
+  --focus: #000;
+
+  --police: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --gouttiere: 16px;
+}
+
+body {
+  background: var(--blanc);
+  color: var(--noir);
+  font: 400 1rem/1.5 var(--police);
+}
+
+/* ---------------- En-tête ---------------- */
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 var(--gouttiere);
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--jaune);
+  border-bottom: var(--trait);
+}
+
+.entete-nom {
+  margin-right: auto;
+  padding: 10px 0;
+  font-size: 1.25rem;
+  font-weight: 900;
+  font-stretch: 125%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--noir);
+  text-decoration: none;
+}
+
+.entete-nav {
+  display: flex;
+}
+
+.entete-nav a {
+  display: grid;
+  place-items: center;
+  min-height: 52px;
+  padding: 0 8px;
+  color: var(--noir);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.entete-appel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  background: var(--noir);
+  color: var(--jaune);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.entete-appel-texte {
+  display: none;
+}
+
+/* ---------------- Affiche (hero) ---------------- */
+.affiche {
+  padding: 28px var(--gouttiere) 32px;
+  background: var(--jaune);
+}
+
+.affiche-titre {
+  font-weight: 900;
+  font-stretch: 62%;
+  font-size: clamp(5rem, 27vw, 15rem);
+  line-height: 0.84;
+  letter-spacing: -0.01em;
+}
+
+/* Chaque ligne est un "cache" ; le texte monte à l'intérieur */
+.affiche-titre .ligne {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+}
+
+.affiche-titre .ligne span {
+  display: block;
+  animation: ligne-monte 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.affiche-titre .ligne:nth-child(2) span { animation-delay: 0.09s; }
+.affiche-titre .ligne:nth-child(3) span { animation-delay: 0.18s; }
+
+@keyframes ligne-monte {
+  from { transform: translateY(105%); }
+  to   { transform: translateY(0); }
+}
+
+.affiche-texte {
+  max-width: 22em;
+  margin-top: 22px;
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* ---------------- Bandeau noir ---------------- */
+.bandeau {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 20px;
+  padding: 14px var(--gouttiere);
+  background: var(--noir);
+  color: var(--blanc);
+  font-size: 0.9375rem;
+}
+
+.statut {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+
+.statut-pastille {
+  width: 12px;
+  height: 12px;
+  background: #9a9a9a;
+}
+.statut[data-etat="ouvert"] .statut-pastille { background: #3DDC84; }
+.statut[data-etat="ferme"] .statut-pastille  { background: #FF5A4E; }
+
+.statut-texte {
+  font-weight: 800;
+  color: var(--jaune);
+}
+
+/* ---------------- Formules ---------------- */
+.midi {
+  padding: 40px var(--gouttiere) 48px;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* Intertitre en très large */
+.titre-large {
+  font-size: clamp(1.625rem, 7.4vw, 2.75rem);
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.midi-quand {
+  margin: 10px 0 24px;
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+/* La grille : bordures noires épaisses, comme une affiche imprimée */
+.formules {
+  display: grid;
+  border: var(--trait);
+}
+
+.formule {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "nom  prix"
+    "compo prix";
+  align-items: end;
+  gap: 4px 12px;
+  padding: 18px 16px 16px;
+  background: var(--blanc);
+}
+
+.formule + .formule {
+  border-top: var(--trait);
+}
+
+.formule-nom {
+  grid-area: nom;
+  align-self: start;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 1.15;
+}
+
+.formule-compo {
+  grid-area: compo;
+  align-self: start;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+/* Prix gigantesques en très condensé */
+.formule-prix {
+  grid-area: prix;
+  font-weight: 900;
+  font-stretch: 62%;
+  font-size: clamp(4.25rem, 22vw, 8rem);
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* La formule complète : fond noir, prix jaune */
+.formule-complete {
+  background: var(--noir);
+  color: var(--blanc);
+}
+.formule-complete .formule-prix {
+  color: var(--jaune);
+}
+
+/* Ce qui est compris / en plus */
+.compris {
+  display: grid;
+  border: var(--trait);
+  border-top: 0;
+}
+
+.compris div {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+}
+.compris div + div {
+  border-top: 2px solid var(--noir);
+}
+
+.compris dt {
+  flex: 0 0 4.8em;
+  font-weight: 800;
+}
+
+.exemple {
+  margin-top: 20px;
+  padding: 16px;
+  background: var(--jaune);
+  border: var(--trait);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.exemple-etiquette {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.875rem;
+  font-weight: 800;
+  font-stretch: 125%;
+}
+
+.mention-exemple {
+  margin-top: 10px;
+  font-size: 0.8125rem;
+  color: #3a3a3a;
+}
+
+/* ---------------- La journée ---------------- */
+.journee {
+  padding: 8px var(--gouttiere) 48px;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.horaire-liste {
+  margin-top: 20px;
+  border-top: var(--trait);
+}
+
+.horaire-liste li {
+  display: grid;
+  grid-template-columns: 5.2rem 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 16px 0;
+  border-bottom: 2px solid var(--noir);
+}
+
+.heure {
+  font-weight: 900;
+  font-stretch: 62%;
+  font-size: 3rem;
+  line-height: 0.85;
+}
+
+.horaire-liste h3 {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  font-stretch: 125%;
+  margin-bottom: 2px;
+}
+
+/* ---------------- Brunch (section noire) ---------------- */
+.brunch {
+  padding: 44px var(--gouttiere) 48px;
+  background: var(--noir);
+  color: var(--blanc);
+}
+
+.brunch > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.brunch-titre {
+  font-weight: 900;
+  font-stretch: 62%;
+  font-size: clamp(3.5rem, 17vw, 9rem);
+  line-height: 0.88;
+}
+
+.brunch-quand {
+  margin-top: 12px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-stretch: 125%;
+}
+
+.brunch-prix {
+  margin-top: 18px;
+  font-weight: 900;
+  font-stretch: 62%;
+  font-size: clamp(6rem, 34vw, 12rem);
+  line-height: 0.8;
+  color: var(--jaune);
+}
+
+.brunch-detail {
+  margin-top: 14px;
+  font-size: 1.0625rem;
+}
+
+.brunch .mention-exemple {
+  color: #bdbdbd;
+}
+
+/* ---------------- Infos ---------------- */
+.infos {
+  padding: 40px var(--gouttiere) 44px;
+  background: var(--jaune);
+  border-top: var(--trait);
+}
+
+.infos > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.infos-grille {
+  display: grid;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.horaires {
+  border-top: var(--trait);
+}
+
+.horaires div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 12px 0;
+  border-bottom: 2px solid var(--noir);
+  font-size: 1.0625rem;
+}
+
+.horaires dt {
+  font-weight: 800;
+}
+
+.adresse {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 18px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.bouton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 12px 16px;
+  border: var(--trait);
+  background: var(--noir);
+  color: var(--jaune);
+  font-size: 1.0625rem;
+  font-weight: 800;
+  font-stretch: 125%;
+  text-decoration: none;
+}
+
+.bouton-blanc {
+  background: var(--blanc);
+  color: var(--noir);
+}
+
+/* ---------------- Pied ---------------- */
+.pied {
+  padding: 36px var(--gouttiere) 32px;
+  background: var(--noir);
+  color: #e6e6e6;
+  font-size: 0.9375rem;
+}
+
+.pied-nom {
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--jaune);
+  margin-bottom: 6px;
+}
+
+.pied-insta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 6px;
+  color: var(--blanc);
+  font-weight: 700;
+}
+
+.brunch :focus-visible,
+.pied :focus-visible,
+.bandeau :focus-visible {
+  outline-color: var(--jaune);
+}
+
+/* ---------------- Tablette et ordinateur ---------------- */
+@media (min-width: 768px) {
+  :root {
+    --gouttiere: 32px;
+  }
+
+  .entete-nav a {
+    padding: 0 14px;
+  }
+
+  .entete-appel {
+    padding: 0 16px 0 12px;
+  }
+
+  .entete-appel-texte {
+    display: inline;
+  }
+
+  .affiche {
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  /* Les 3 formules côte à côte */
+  .formules {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .formule {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nom"
+      "compo"
+      "prix";
+    align-items: start;
+    padding: 24px 22px 26px;
+  }
+
+  .formule-compo {
+    min-height: 2.8em;
+  }
+
+  .formule-prix {
+    margin-top: 28px;
+    font-size: clamp(6rem, 11vw, 10rem);
+  }
+
+  .formule + .formule {
+    border-top: 0;
+    border-left: var(--trait);
+  }
+
+  .compris {
+    grid-template-columns: 1fr 1fr;
+  }
+  .compris div + div {
+    border-top: 0;
+    border-left: 2px solid var(--noir);
+  }
+
+  .horaire-liste {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 24px;
+  }
+
+  .horaire-liste li {
+    grid-template-columns: 1fr;
+  }
+
+  .heure {
+    font-size: 4.5rem;
+  }
+
+  .infos-grille {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+}

@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Monaco, café-bar-bistrot à Paris 13e (version Journée)</title>
+  <meta name="description" content="Monaco, 2 rue Vulpian, Paris 13e. Ouvert maintenant ? Le café dès 7h30, les formules du midi, l'apéro jusqu'à minuit, brunch le dimanche.">
+  <meta name="theme-color" content="#DCEBF2">
+
+  <!-- Aperçu du lien (SMS, WhatsApp…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Monaco">
+  <meta property="og:title" content="Monaco, version C : Journée">
+  <meta property="og:description" content="Du café de 7h30 à l'apéro de minuit : la journée du Monaco, heure par heure.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%2313294B'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' text-anchor='middle' fill='%23DCEBF2'%3EM%3C/text%3E%3C/svg%3E">
+
+  <!-- Polices : Gloock (titres) + Karla (texte) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Karla:wght@400;600;700&display=swap">
+
+  <link rel="stylesheet" href="../commun/commun.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/script.js" defer></script>
+</head>
+<body>
+  <a class="evitement" href="#midi">Aller aux formules du midi</a>
+
+  <!-- ============ EN-TÊTE ============ -->
+  <header class="entete">
+    <a class="entete-nom" href="#haut">Monaco</a>
+    <nav class="entete-nav" aria-label="Sections de la page">
+      <a href="#midi">Midi</a>
+      <a href="#journee">Journée</a>
+      <a href="#infos">Infos</a>
+    </nav>
+    <a class="entete-appel" href="tel:+33144930022" aria-label="Appeler le Monaco au 01 44 93 00 22">
+      <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+      <span class="entete-appel-texte">01 44 93 00 22</span>
+    </a>
+  </header>
+
+  <main id="haut">
+
+    <!-- ============ HERO : le statut en direct ============ -->
+    <section class="hero" aria-labelledby="titre">
+      <!-- Le badge en grand, mis à jour chaque minute par script.js -->
+      <p class="badge" data-statut>
+        <span class="badge-ligne">
+          <span class="badge-pastille" aria-hidden="true"></span>
+          <span class="badge-texte" data-statut-texte>Ouvert tous les jours</span>
+        </span>
+        <span class="badge-detail" data-statut-detail>Du lundi au samedi jusqu'à minuit</span>
+      </p>
+      <h1 id="titre" class="hero-titre">Monaco</h1>
+      <p class="hero-texte">Café, bar et bistrot au 2 rue Vulpian, Paris 13e. Du premier café à l'apéro de minuit.</p>
+      <a class="bouton" href="#midi">Voir les formules du midi</a>
+    </section>
+
+    <!-- ============ FRISE DE LA JOURNÉE ============ -->
+    <section id="journee" class="journee" aria-labelledby="titre-journee">
+      <h2 id="titre-journee" class="section-titre">La journée au Monaco</h2>
+      <p class="journee-sous">Du lundi au samedi. L'étape en cours est signalée en direct.</p>
+
+      <ol class="frise">
+        <li class="etape" data-periode="matin">
+          <p class="etape-heure" data-texte="ouverture">7h30</p>
+          <div class="etape-corps">
+            <span class="maintenant">Maintenant</span>
+            <h3>Le café</h3>
+            <p>Café et petit-déjeuner, au comptoir ou en salle.</p>
+          </div>
+        </li>
+
+        <!-- L'étape la plus importante : les formules du midi -->
+        <li class="etape etape-midi" data-periode="midi" id="midi">
+          <p class="etape-heure" data-texte="midiDebut">12h</p>
+          <div class="etape-corps">
+            <span class="maintenant">Maintenant</span>
+            <h3>Formules du midi</h3>
+            <p><span data-texte="midiJours">Du lundi au samedi</span>, <span data-texte="midiHoraire">de 12h à 14h30</span>. Prix par personne.</p>
+
+            <div class="formules">
+              <ul>
+                <li class="formule">
+                  <span class="formule-nom">Plat du jour seul</span>
+                  <span class="formule-prix" data-prix="plat">14 €</span>
+                </li>
+                <li class="formule">
+                  <span class="formule-nom">Entrée + plat<br>ou plat + dessert</span>
+                  <span class="formule-prix" data-prix="deux">18 €</span>
+                </li>
+                <li class="formule">
+                  <span class="formule-nom">Entrée + plat + dessert</span>
+                  <span class="formule-prix" data-prix="trois">22 €</span>
+                </li>
+              </ul>
+              <p class="formules-note">
+                <span data-texte="midiCompris">Pain et carafe d'eau compris</span>.
+                <span data-texte="midiNonCompris">Boissons et café en supplément</span>.
+              </p>
+              <p class="formules-exemple" data-texte="exemple">À deux, entrée + plat chacun : 2 × 18 € = 36 €, hors boissons.</p>
+            </div>
+            <p class="mention-exemple" data-mention-exemple>Prix d'exemple</p>
+          </div>
+        </li>
+
+        <li class="etape" data-periode="apresmidi">
+          <p class="etape-heure" data-texte="midiFin">14h30</p>
+          <div class="etape-corps">
+            <span class="maintenant">Maintenant</span>
+            <h3>L'après-midi</h3>
+            <p>Fin du service du midi. Le café reste ouvert.</p>
+          </div>
+        </li>
+
+        <li class="etape" data-periode="soir">
+          <p class="etape-heure" data-texte="apero">18h</p>
+          <div class="etape-corps">
+            <span class="maintenant">Maintenant</span>
+            <h3>L'apéro</h3>
+            <p>Un verre et des planches à partager.</p>
+          </div>
+        </li>
+
+        <li class="etape etape-fin">
+          <p class="etape-heure">Minuit</p>
+          <div class="etape-corps">
+            <h3>Fermeture</h3>
+            <p>Réouverture le lendemain à <span data-texte="ouverture">7h30</span>.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ BRUNCH DU DIMANCHE ============ -->
+    <section class="brunch-zone" aria-labelledby="titre-brunch">
+      <div class="brunch" data-periode="brunch">
+        <span class="maintenant">Maintenant</span>
+        <h2 id="titre-brunch" class="brunch-titre">Le dimanche, c'est brunch</h2>
+        <p class="brunch-quand"><span data-texte="brunchHoraire">de 10h30 à 15h</span></p>
+        <p class="brunch-prix"><span data-prix="brunch">26 €</span> <span class="brunch-unite">par personne</span></p>
+        <p data-texte="brunchCompris">Boisson chaude et jus de fruits compris</p>
+        <p class="mention-exemple" data-mention-exemple>Prix d'exemple</p>
+      </div>
+    </section>
+
+    <!-- ============ HORAIRES & ADRESSE ============ -->
+    <section id="infos" class="infos" aria-labelledby="titre-infos">
+      <h2 id="titre-infos" class="section-titre">Horaires et adresse</h2>
+      <div class="infos-grille">
+        <dl class="horaires">
+          <div>
+            <dt>Du lundi au samedi</dt>
+            <dd>7h30 à minuit</dd>
+          </div>
+          <div>
+            <dt>Dimanche</dt>
+            <dd>10h30 à 15h, brunch</dd>
+          </div>
+        </dl>
+        <div>
+          <address class="adresse">
+            Monaco<br>
+            2 rue Vulpian<br>
+            75013 Paris
+          </address>
+          <div class="actions">
+            <a class="bouton" href="tel:+33144930022">Appeler</a>
+            <a class="bouton bouton-clair" href="https://www.google.com/maps/search/?api=1&amp;query=Monaco+2+rue+Vulpian+75013+Paris" target="_blank" rel="noopener">Itinéraire</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <p class="pied-nom">Monaco</p>
+    <p>2 rue Vulpian, 75013 Paris, 01 44 93 00 22</p>
+    <a class="pied-insta" href="https://www.instagram.com/nwmonaco/" target="_blank" rel="noopener">Instagram : @nwmonaco</a>
+  </footer>
+
+  <!-- Barre de démo (à retirer pour le vrai site) -->
+  <nav class="demo-barre" aria-label="Changer de version">
+    <div class="demo-versions">
+      <span class="demo-titre">Version</span>
+      <a href="../a/index.html" aria-label="Version A, Comptoir">A</a>
+      <span class="demo-sep" aria-hidden="true">·</span>
+      <a href="../b/index.html" aria-label="Version B, Formule">B</a>
+      <span class="demo-sep" aria-hidden="true">·</span>
+      <a href="../c/index.html" aria-current="page" aria-label="Version C, Journée">C</a>
+    </div>
+    <p class="demo-auteur" data-proposition>Proposition de Reda Lakhledj</p>
+  </nav>
+</body>
+</html>
