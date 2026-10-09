@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>La carte du Monaco</title>
+  <meta name="description" content="La carte du Monaco, 2 rue Vulpian, Paris 13e : formules du midi et brunch du dimanche, avec les prix.">
+  <meta name="theme-color" content="#1F4A3A">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Monaco">
+  <meta property="og:title" content="La carte du Monaco">
+  <meta property="og:description" content="Formules du midi et brunch du dimanche, avec les prix.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4A3A'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23E2B850'%3EM%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Work+Sans:wght@400;500;600&display=swap">
+
+  <!-- Page "carte à table" (QR code) : elle reprend le style de la version A -->
+  <link rel="stylesheet" href="../commun/commun.css">
+  <link rel="stylesheet" href="../a/style.css">
+  <style>
+    /* Pas de barre de démo ici : c'est la page que verront les clients */
+    body { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+    .menu-tete {
+      padding: calc(28px + env(safe-area-inset-top, 0px)) 16px 24px;
+      background: var(--vert);
+      text-align: center;
+    }
+    .menu-tete .enseigne { font-size: clamp(3.5rem, 18vw, 6rem); }
+    .menu-tete .statut { margin-top: 14px; border-color: var(--or); }
+
+    .ardoise {
+      max-width: 34rem;
+      margin: 0 auto;
+      padding: 0 16px 8px;
+      text-align: center;
+      font-size: 1.0625rem;
+    }
+
+    .menu-brunch {
+      max-width: 34rem;
+      margin: 0 auto;
+      padding: 0 16px 40px;
+    }
+
+    .menu-pied {
+      padding: 28px 16px 36px;
+      background: var(--vert);
+      color: #DDE6E1;
+      text-align: center;
+    }
+    .menu-pied a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: #fff;
+      font-weight: 600;
+    }
+  </style>
+  <script src="../commun/script.js" defer></script>
+</head>
+<body>
+  <header class="menu-tete">
+    <h1 class="enseigne">Monaco</h1>
+    <p class="statut statut-petit" data-statut>
+      <span class="statut-pastille" aria-hidden="true"></span>
+      <span class="statut-texte" data-statut-texte></span>
+      <span class="statut-detail" data-statut-detail></span>
+    </p>
+  </header>
+
+  <main>
+    <!-- Formules du midi : même bloc que la version A -->
+    <section id="midi" class="midi" aria-labelledby="titre-midi">
+      <div class="carte">
+        <h2 id="titre-midi" class="carte-titre">Formules du midi</h2>
+        <p class="carte-quand">
+          <span data-texte="midiJours">Du lundi au samedi</span>,
+          <span data-texte="midiHoraire">de 12h à 14h30</span>
+        </p>
+
+        <ul class="carte-lignes">
+          <li class="ligne">
+            <span class="ligne-nom">Plat du jour seul</span>
+            <span class="ligne-points" aria-hidden="true"></span>
+            <span class="ligne-prix" data-prix="plat">14 €</span>
+          </li>
+          <li class="ligne">
+            <span class="ligne-nom">Entrée + plat<br><em>ou</em> plat + dessert</span>
+            <span class="ligne-points" aria-hidden="true"></span>
+            <span class="ligne-prix" data-prix="deux">18 €</span>
+          </li>
+          <li class="ligne">
+            <span class="ligne-nom">Entrée + plat + dessert</span>
+            <span class="ligne-points" aria-hidden="true"></span>
+            <span class="ligne-prix" data-prix="trois">22 €</span>
+          </li>
+        </ul>
+
+        <div class="carte-pied">
+          <p><strong>Prix par personne.</strong>
+            <span data-texte="midiCompris">Pain et carafe d'eau compris</span>.
+            <span data-texte="midiNonCompris">Boissons et café en supplément</span>.
+          </p>
+          <p class="carte-exemple" data-texte="exemple">À deux, entrée + plat chacun : 2 × 18 € = 36 €, hors boissons.</p>
+        </div>
+      </div>
+      <p class="mention-exemple" data-mention-exemple>Prix d'exemple</p>
+    </section>
+
+    <p class="ardoise">Le plat du jour, les entrées et les desserts sont à l'ardoise.<br>Demandez au comptoir.</p>
+
+    <section class="menu-brunch" aria-labelledby="titre-brunch">
+      <h2 id="titre-brunch" class="section-titre" style="margin-top:32px">Le dimanche</h2>
+      <article class="moment moment-brunch">
+        <p class="moment-heure"><span data-texte="brunchHoraire">de 10h30 à 15h</span></p>
+        <h3>Le brunch</h3>
+        <p class="brunch-prix"><span data-prix="brunch">26 €</span> par personne</p>
+        <p data-texte="brunchCompris">Boisson chaude et jus de fruits compris</p>
+        <p class="mention-exemple" data-mention-exemple>Prix d'exemple</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="menu-pied">
+    <p>Monaco, 2 rue Vulpian, 75013 Paris</p>
+    <a href="https://www.instagram.com/nwmonaco/" target="_blank" rel="noopener">Instagram : @nwmonaco</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monaco : QR code de table</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Work+Sans:wght@400;600&display=swap">
+  <style>
+    /* Carte de table à imprimer (format A6 : 10,5 x 14,8 cm) */
+    @page { size: A6; margin: 0; }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background: #E4E7E6;
+      font-family: "Work Sans", -apple-system, sans-serif;
+      color: #1B2622;
+    }
+
+    .chevalet {
+      width: min(105mm, 100%);
+      aspect-ratio: 105 / 148;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9mm 8mm 7mm;
+      background: #fff;
+      border: 5px double #1F4A3A;
+      text-align: center;
+    }
+
+    .nom {
+      margin: 0;
+      font: 400 2.6rem/1 "DM Serif Display", Georgia, serif;
+      color: #1F4A3A;
+    }
+    .sous-titre {
+      margin: 4px 0 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .qr {
+      width: 62%;
+      height: auto;
+    }
+
+    .consigne {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .adresse {
+      margin: 6px 0 0;
+      font-size: 0.7rem;
+      color: #4A5753;
+    }
+
+    .imprimer {
+      margin-top: 16px;
+      min-height: 44px;
+      padding: 10px 20px;
+      border: 0;
+      border-radius: 4px;
+      background: #1F4A3A;
+      color: #fff;
+      font: 600 1rem "Work Sans", sans-serif;
+      cursor: pointer;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; min-height: 0; }
+      .chevalet { width: 105mm; height: 148mm; border-width: 6px; }
+      .imprimer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="chevalet">
+      <div>
+        <p class="nom">Monaco</p>
+        <p class="sous-titre">La carte et les formules du midi</p>
+      </div>
+      <img class="qr" src="qr-menu.svg" alt="QR code vers la carte du Monaco">
+      <div>
+        <p class="consigne">Scannez avec l'appareil photo<br>de votre téléphone</p>
+        <p class="adresse">redalak.github.io/monaco/menu</p>
+      </div>
+    </div>
+    <button class="imprimer" type="button" onclick="window.print()">Imprimer</button>
+  </div>
+</body>
+</html>
